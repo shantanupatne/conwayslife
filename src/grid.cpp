@@ -52,3 +52,10 @@ void Grid::fillRandom()
         for (int col = 0; col < columns; col++)
             cells[row][col] = GetRandomValue(0, 4) == 3 ? 1 : 0;
 }
+
+void Grid::clearGrid()
+{
+    for (int row = 0; row < rows; row++)
+        for (int col = 0; col < columns; col++)
+            cells[row][col] = 0;
+}

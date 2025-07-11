@@ -6,7 +6,7 @@
 Color GREY = {11, 11, 11, 255};
 
 int main() {
-    const int win_w{1000}, win_h{1000}, cellSize{5}, maxFPS{60}, minFPS{5};
+    const int win_w{1000}, win_h{1000}, cellSize{10}, maxFPS{60}, minFPS{5};
     int FPS {30};
     InitWindow(win_w, win_h, "Conway's Game of Life");
     SetTargetFPS(FPS);
@@ -22,7 +22,22 @@ int main() {
         BeginDrawing();
         ClearBackground(GREY);
         if (IsKeyPressed(KEY_SPACE)) game.Run();
+        if (IsKeyPressed(KEY_C)) game.clearGrid();
+        if (IsKeyPressed(KEY_R)) game.createRandomState();
         
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && !game.IsSimRunning()) {
+            Vector2 mousePos = GetMousePosition();
+            int row = mousePos.y / cellSize;
+            int col = mousePos.x / cellSize;
+            game.setCell(row, col);
+        }
+        if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT) && !game.IsSimRunning()) {
+            Vector2 mousePos = GetMousePosition();
+            int row = mousePos.y / cellSize;
+            int col = mousePos.x / cellSize;
+            game.unsetCell(row, col);
+        }
+
         if (IsKeyPressed(KEY_F) && FPS < maxFPS) {
             FPS += 5;
             SetTargetFPS(FPS);

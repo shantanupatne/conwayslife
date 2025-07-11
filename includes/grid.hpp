@@ -13,6 +13,7 @@ public:
     int getRows() { return rows; };
     int getColumns() { return columns; };
     void fillRandom();
+    void clearGrid();
 
 private:
     int cellSize{}, rows{}, columns{};
